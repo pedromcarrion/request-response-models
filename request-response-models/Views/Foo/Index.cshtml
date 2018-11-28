@@ -1,0 +1,32 @@
+﻿@model requestresponsemodels.Models.CitiesAndJobs.Response.FooResponseModel
+<div>
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="error">
+            <p>@Model.ErrorMessage</p>
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.Message))
+    {
+        <div class="message">
+            <p>@Model.Message</p>
+        </div>
+    }
+
+    <form method="post">
+        <select id="js-cities" name="SelectedValues.City">
+            @foreach (var city in Model.Cities)
+            {
+                <option>@city</option>
+            }
+        </select>
+
+        <select id="js-jobs" name="SelectedValues.Job">
+            @foreach (var job in Model.Jobs)
+            {
+                <option>@job</option>
+            }
+        </select>
+        <button type="submit"> Seleccionar</button>
+    </form>
+</div>
