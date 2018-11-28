@@ -11,7 +11,7 @@ namespace request_response_models.Mappers
             return new FooResponseModel(jobs, cities);
         }
 
-        internal static FooResponseModel Map(List<string> jobs, List<string> cities, CityAndJob selectedValues)
+        public static FooResponseModel Map(List<string> jobs, List<string> cities, CityAndJob selectedValues)
         {
             return new FooResponseModel(jobs, cities, selectedValues);
         }
