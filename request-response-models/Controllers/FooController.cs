@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using request_response_models.Mappers;
 using request_response_models.ServiceLibrary.Contracts;
 using requestresponsemodels.Models.CitiesAndJobs.Request;
-using requestresponsemodels.Models.CitiesAndJobs.Response;
 
 namespace request_response_models.Controllers
 {
@@ -19,7 +18,9 @@ namespace request_response_models.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var fooResponseModel = new FooResponseModel(_fooService);
+            var jobs = _fooService.GetJobs();
+            var cities = _fooService.GetCities();
+            var fooResponseModel = FooMapper.Map(jobs, cities);
             return View(fooResponseModel);
         }
 
@@ -27,22 +28,14 @@ namespace request_response_models.Controllers
         [HttpPost]
         public IActionResult Index(FooRequestModel fooRequestModel)
         {
-            var fooResponseModel = new FooResponseModel(_fooService, fooRequestModel.SelectedValues);
+            var jobs = _fooService.GetJobs();
+            var cities = _fooService.GetCities();
 
-            if (fooRequestModel.SelectedValues.City == "Selecciona un valor" 
-               || fooRequestModel.SelectedValues.Job == "Selecciona un valor")
-            {
-                fooResponseModel.ErrorMessage = "Debe seleccionar valores en los dos campos";
-            }
-            else
-            {
-                //TODO Call a service to do somenthing with the values selected by user
-                fooResponseModel.Message = "Todo correcto!";
-            }
+            //TODO Call a service to do somenthing with the values selected by user
 
+            var fooResponseModel = FooMapper.Map(jobs, cities, fooRequestModel.SelectedValues);
             return View(fooResponseModel);
         }
-
 
     }
 }
