@@ -6,11 +6,11 @@ namespace requestresponsemodels.Models.CitiesAndJobs.Response
     public class FooResponseModel
     {
 
-        public List<string> Cities { get; private set; }
+        public List<string> Cities { get; set; }
 
-        public List<string> Jobs { get; private set; }
+        public List<string> Jobs { get; set; }
 
-        public CityAndJob SelectedValues { get; private set; }
+        public CityAndJob SelectedValues { get; set; }
 
         public string ErrorMessage {
             get
@@ -28,21 +28,6 @@ namespace requestresponsemodels.Models.CitiesAndJobs.Response
         }
 
         public string Message { get; set; }
-
-
-        public FooResponseModel(List<string> jobs, List<string> cities, CityAndJob selectedValues)
-        {
-            Cities = cities;
-            Jobs = jobs;
-            SelectedValues = selectedValues;
-        }
-
-        public FooResponseModel(List<string> jobs, List<string> cities)
-        {
-            Cities = cities;
-            Jobs = jobs;
-            SelectedValues = new CityAndJob();
-        }
 
         public FooResponseModel()
         {

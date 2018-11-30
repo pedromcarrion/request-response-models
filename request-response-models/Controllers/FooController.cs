@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using request_response_models.Mappers;
+using request_response_models.Builders;
 using request_response_models.ServiceLibrary.Contracts;
 using requestresponsemodels.Models.CitiesAndJobs.Request;
 
@@ -18,9 +18,11 @@ namespace request_response_models.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var jobs = _fooService.GetJobs();
-            var cities = _fooService.GetCities();
-            var fooResponseModel = FooMapper.Map(jobs, cities);
+            var fooResponseModel = new FooResponseModelBuilder(_fooService)
+                .WithJobs()
+                .WithCities()
+                .Build();
+                
             return View(fooResponseModel);
         }
 
@@ -28,12 +30,14 @@ namespace request_response_models.Controllers
         [HttpPost]
         public IActionResult Index(FooRequestModel fooRequestModel)
         {
-            var jobs = _fooService.GetJobs();
-            var cities = _fooService.GetCities();
-
             //TODO Call a service to do somenthing with the values selected by user
 
-            var fooResponseModel = FooMapper.Map(jobs, cities, fooRequestModel.SelectedValues);
+            var fooResponseModel = new FooResponseModelBuilder(_fooService)
+                .WithJobs()
+                .WithCities()
+                .WithSelectedValues(fooRequestModel.SelectedValues)
+                .Build();
+
             return View(fooResponseModel);
         }
 
