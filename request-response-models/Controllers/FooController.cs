@@ -18,7 +18,7 @@ namespace request_response_models.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var fooResponseModel = new FooResponseModelBuilder(_fooService)
+            var fooResponseModel = FooResponseModelBuilder.CreateNew(_fooService)
                 .WithJobs()
                 .WithCities()
                 .Build();
@@ -31,8 +31,7 @@ namespace request_response_models.Controllers
         public IActionResult Index(FooRequestModel fooRequestModel)
         {
             //TODO Call a service to do somenthing with the values selected by user
-
-            var fooResponseModel = new FooResponseModelBuilder(_fooService)
+            var fooResponseModel = FooResponseModelBuilder.CreateNew(_fooService)
                 .WithJobs()
                 .WithCities()
                 .WithSelectedValues(fooRequestModel.SelectedValues)

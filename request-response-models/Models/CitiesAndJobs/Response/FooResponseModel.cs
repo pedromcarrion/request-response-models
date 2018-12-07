@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using request_response_models.ServiceLibrary.Contracts;
 using requestresponsemodels.Models.CitiesAndJobs.Common;
 
 namespace requestresponsemodels.Models.CitiesAndJobs.Response
@@ -12,7 +13,8 @@ namespace requestresponsemodels.Models.CitiesAndJobs.Response
 
         public CityAndJob SelectedValues { get; set; }
 
-        public string ErrorMessage {
+        public string ErrorMessage
+        {
             get
             {
                 if (SelectedValues.City == "Selecciona un valor"
@@ -35,4 +37,5 @@ namespace requestresponsemodels.Models.CitiesAndJobs.Response
         }
 
     }
+
 }
